@@ -416,6 +416,9 @@ def parse_resultrows(num_resultrows, resultrows_blob, callback):
                 pass
             elif Type == ColumnType.String:
                 Value = Value.decode('utf-16le')
+                #remove NULL termination
+                if Value.endswith('\0'):
+                    Value = Value[:-1]
 
             row.append((Index, Type, Flags, Value))
 
